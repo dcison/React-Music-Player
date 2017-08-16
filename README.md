@@ -1,5 +1,5 @@
 # React-Music-Player
-Learn by imooc
+Learn from imooc
 ### 功能与设计
 * 布局采用Bootstrap（因为懒，懒得设计了）
 * 完成了imooc视频上所有功能

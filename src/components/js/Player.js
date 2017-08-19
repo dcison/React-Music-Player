@@ -34,7 +34,10 @@ class Player extends React.Component {
         });
     }
     volumeChangeHandler(progress){
-        $('#Player').jPlayer('volume',progress)
+        $('#Player').jPlayer('volume',progress);
+        this.setState({
+            volume:progress * 100
+        });
     }
     play(){
         if(this.state.isPlay){

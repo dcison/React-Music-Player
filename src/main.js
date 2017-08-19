@@ -41,9 +41,11 @@ export default class Main extends React.Component {
         newIndex = (index - 1 + this.state.musicList.length) % this.state.musicList.length;
       }
     }else{
-      newIndex = Math.round(Math.random()*6);
+      newIndex = Math.floor(Math.random()* this.state.musicList.length);
     }
-    this.PlayMusic(this.state.musicList[newIndex]);
+    if(this.state.musicList.length != 0){
+      this.PlayMusic(this.state.musicList[newIndex]);
+    }else{this.PlayMusic("")}
     if(!this.state.isPlay){
       $('#Player').jPlayer('pause');
     }   
@@ -51,7 +53,9 @@ export default class Main extends React.Component {
   }
   playEnd(Module) {
     if (Module === "repeat") {
-      this.PlayMusic(this.state.currentMusicItem);
+      if(this.state.musicList.length != 0){
+        this.PlayMusic(this.state.currentMusicItem);
+      }else{this.PlayMusic("")}      
     } else {
       this.playNext("next", Module);
     }
@@ -75,7 +79,6 @@ export default class Main extends React.Component {
       this.PlayMusic(Item, this.state.currentModule);
     });
     Pubsub.subscribe('MUSIC_ISPLAY', (msg, Item) => {
-      console.log(Item);
       this.setState({
         isPlay: Item
       });
@@ -85,7 +88,10 @@ export default class Main extends React.Component {
         musicList: this.state.musicList.filter((i) => {
           return i !== Item;
         })
-      })
+      });
+      if(this.state.currentMusicItem == Item){
+        this.playNext("next", this.state.currentModule);
+      }      
     });
     Pubsub.subscribe('MODULECHANGE', (msg, Item) => {
       this.changeModule();

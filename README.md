@@ -1,5 +1,7 @@
 # React-Music-Player
 Learn from imooc
+### 展示地址
+[点我](http://dcison.top/React-Music-Player/build)
 ### 功能与设计
 * 布局采用Bootstrap（因为懒，懒得设计了）
 * 完成了imooc视频上所有功能
